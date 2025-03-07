@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 /// 快速数据存储工具
 /// 存档会放到可读写目录下
 /// 也提供复制存档功能
-/// Key：要求独一无二
+/// Key：要求独一无二，推荐命名规则 [命名空间]_[类名]_[字段名]
 /// </summary>
 public static class QuickData
 {
