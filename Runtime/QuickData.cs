@@ -51,6 +51,25 @@ public static class QuickData
     }
 
     /// <summary>
+    /// 保存long类型的数据
+    /// </summary>
+    /// <param name="key">Key值：唯一</param>
+    /// <param name="value">long数据</param>
+    public static void SetLong(string key, long value)
+    {
+        DataInfo.Instance.SetValue(key, value);
+    }
+    /// <summary>
+    /// 获取long类型的数据
+    /// </summary>
+    /// <param name="key">Key值：唯一/param>
+    /// <returns>Int数据</returns>
+    public static long GetLong(string key, long defaultValue = default)
+    {
+        return DataInfo.Instance.GetValue(key, defaultValue);
+    }
+
+    /// <summary>
     /// 保存Bool类型的数据
     /// </summary>
     /// <param name="key">Key值：唯一</param>
@@ -167,6 +186,10 @@ public static class QuickData
         }
     }
 
+    public static string GetAllInfo(bool Decrypt = false)
+    {
+        return DataInfo.Instance.GetAllInfo(Decrypt);
+    }
 
     /// <summary>
     /// 存放所有数据
@@ -193,6 +216,7 @@ public static class QuickData
         private DataInfo()
         {
             LoadData();
+            Debug.Log("文件保存路径：" + FilePath);
         }
 
         #endregion
