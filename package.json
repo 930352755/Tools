@@ -1,13 +1,13 @@
 {
-
     "name": "com.unity.zxy.quickdata",
     "version": "1.0.0",
     "displayName": "SDK Quick Data",
     "description": "快速存储数据，读取数据工具",
-
+    "unity": "2020.3",
+    "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+    },
     "author": {
-
         "name": "ZXY"
     }
-
 }
