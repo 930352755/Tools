@@ -7,7 +7,11 @@
     "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.1"
     },
+
     "author": {
-        "name": "ZXY"
+        "name": "ZXY",
+        "email": "930352755@qq.com",
+        "url": "https://github.com/930352755/Tools.git"
     }
 }
+
