@@ -1,0 +1,16 @@
+{
+    "name": "com.unity.zxy.tools",
+    "version": "1.0.0",
+    "displayName": "SDK Tools",
+    "description": "管理工具的工具",
+    "unity": "2020.3",
+    "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+    },
+    "author": {
+        "name": "ZXY",
+        "email": "930352755@qq.com",
+        "url": "https://github.com/930352755/Tools.git"
+    }
+}
+
