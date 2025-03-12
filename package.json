@@ -1,0 +1,12 @@
+{
+
+    "name": "com.unity.zxy.excelreadplugin",
+    "version": "1.0.0",
+    "displayName": "SDK Excel Read Plugin",
+    "description": "可以在Unity中实现读取Excel文件的工具",
+    "author":
+    {
+        "name": "ZXY"
+    }
+
+}
