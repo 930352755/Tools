@@ -1,8 +1,11 @@
+#if UNITY_EDITOR
 using System;
 using System.Linq;
 using UnityEditor;
+
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
+
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
@@ -81,7 +84,14 @@ namespace Game.Editor
                     description = "用于读取Excel文件的工具包"
                 },
 
-               
+                new SDKInfo
+                {
+                    displayName = "YooAsset资源加载工具",
+                    packageName = "com.unity.zxy.yooassets",
+                    gitUrl = "https://github.com/930352755/Tools.git#SDK-ExcelReadPlugin",
+                    description = "资源管理工具，提供资源的加载，封装的固定版本YooAssets V2.1.2,添加了管理器，目前只使用其中单机加载资源功能部分。加载路径直接 Assets/AYooAssetRes 下的相对路径就行了"
+                },
+
             };
         }
 
@@ -334,3 +344,5 @@ namespace Game.Editor
         #endregion
     }
 }
+
+#endif
