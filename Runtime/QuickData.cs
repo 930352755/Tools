@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 /// <summary>
 /// 快速数据存储工具
@@ -283,21 +284,23 @@ public static class QuickData
             stream.Close();
         }
 
+
         private static bool isSavingQueued = false;
-        /// <summary>
-        /// 一帧最多只保存一次
-        /// </summary>
-        private void QueueSaveData()
+        private static object lockObject = new object();
+        public void QueueSaveData()
         {
-            if (!isSavingQueued)
+            lock (lockObject) // 确保线程安全
             {
-                isSavingQueued = true;
-                // Unity 主线程延迟调用
-                UnityEngine.WSA.Application.InvokeOnAppThread(() =>
+                if (!isSavingQueued)
                 {
-                    SaveData();
-                    isSavingQueued = false;
-                }, false);
+                    isSavingQueued = true;
+                    Task.Run(async () =>
+                    {
+                        await Task.Delay(100); // 100ms 内只执行一次
+                        SaveData();
+                        isSavingQueued = false;
+                    });
+                }
             }
         }
 
