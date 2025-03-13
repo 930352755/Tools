@@ -1,12 +1,8 @@
 {
-    "name": "com.unity.zxy.tools",
-    "version": "1.0.0",
-    "displayName": "SDK Tools",
-    "description": "管理工具的工具",
-    "unity": "2020.3",
-    "dependencies": {
-        "com.unity.nuget.newtonsoft-json": "3.2.1"
-    },
+    "name": "com.unity.zxy.yooassets",
+    "version": "2.1.2",
+    "displayName": "SDK YooAssets",
+    "description": "资源管理工具",
     "author": {
         "name": "ZXY",
         "email": "930352755@qq.com",
