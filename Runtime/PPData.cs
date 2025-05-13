@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 /// 也提供复制存档功能
 /// Key：要求独一无二，推荐命名规则 [命名空间]_[类名]_[字段名]
 /// </summary>
-public static class QuickData
+public static class PPData
 {
 
     /// <summary>
@@ -178,7 +178,10 @@ public static class QuickData
         {
             string jsonDe = JsonConvert.SerializeObject(defaultValue);
             string jsonTa = DataInfo.Instance.GetValue(key, jsonDe);
-            return JsonConvert.DeserializeObject<T>(jsonTa);
+            return JsonConvert.DeserializeObject<T>(jsonTa, new JsonSerializerSettings()
+            {
+                ObjectCreationHandling = ObjectCreationHandling.Replace
+            });
         }
         catch (JsonException ex)
         {
@@ -217,7 +220,7 @@ public static class QuickData
         private DataInfo()
         {
             LoadData();
-            Debug.Log("文件保存路径：" + FilePath);
+            Debug.Log("PPData:文件保存路径：" + FilePath);
         }
 
         #endregion
@@ -225,8 +228,8 @@ public static class QuickData
         #region 保存读取
 
         private string DataPath => GetType().Name;
-        private string FilePath => Path.Combine(UnityEngine.Application.persistentDataPath, "QuickData", DataPath);
-        private string DirectoryPath => Path.Combine(UnityEngine.Application.persistentDataPath, "QuickData");
+        private string FilePath => Path.Combine(UnityEngine.Application.persistentDataPath, "PPData", DataPath);
+        private string DirectoryPath => Path.Combine(UnityEngine.Application.persistentDataPath, "PPData");
 
         /// <summary>
         /// 加载保存数据
@@ -264,7 +267,7 @@ public static class QuickData
             }
             catch (System.Exception e)
             {
-                Debug.LogError($"Game_DataBase: Direct parsing failed. Clear file :{e}");
+                Debug.LogError($"PPData: 加载失败. 清理文件 :{e}");
             }
         }
 
@@ -284,29 +287,17 @@ public static class QuickData
             stream.Close();
         }
 
-
-        private static bool isSavingQueued = false;
-        private static object lockObject = new object();
+        /// <summary>
+        /// 就快速保存
+        /// </summary>
         public void QueueSaveData()
         {
-            lock (lockObject) // 确保线程安全
-            {
-                if (!isSavingQueued)
-                {
-                    isSavingQueued = true;
-                    Task.Run(async () =>
-                    {
-                        await Task.Delay(100); // 100ms 内只执行一次
-                        SaveData();
-                        isSavingQueued = false;
-                    });
-                }
-            }
+            SaveData();
         }
 
         #endregion
 
-        #region 加解密
+        #region 简单加解密
 
         /// <summary>
         /// 加密String
